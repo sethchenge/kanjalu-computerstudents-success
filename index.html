@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KCSE Success Wishes</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&family=Playfair+Display:ital,wght@0,500;0,700;1,500&display=swap" rel="stylesheet">
+    <!-- GSAP for Animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    
+    <style>
+        :root {
+            --bg-dark: #111111;
+            --text-cream: #f4f0e6;
+            --gsap-green: #a8ff78;
+            --gsap-pink: #ff7eb3;
+            --gsap-cyan: #70e1f5;
+            --gsap-orange: #ffb347;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-cream);
+            font-family: 'Outfit', sans-serif;
+            margin: 0;
+            padding: 50px 0; 
+            min-height: 100vh; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow-x: hidden; 
+            overflow-y: auto; 
+        }
+
+        .bg-shapes {
+            position: fixed; 
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .shape {
+            position: absolute;
+            filter: blur(90px);
+            opacity: 0.4;
+            border-radius: 50%;
+            animation: float-blob 10s ease-in-out infinite alternate;
+        }
+
+        .shape-1 { width: 400px; height: 400px; background: var(--gsap-pink); top: -10%; left: -10%; }
+        .shape-2 { width: 500px; height: 500px; background: var(--gsap-green); bottom: -20%; right: -10%; animation-delay: -3s; }
+        .shape-3 { width: 350px; height: 350px; background: var(--gsap-cyan); top: 30%; left: 40%; animation-delay: -6s; }
+
+        @keyframes float-blob {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(30px, 50px) scale(1.1); }
+        }
+
+        .app-container {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 1000px;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .screen {
+            display: none;
+            opacity: 0;
+        }
+
+        .screen.active {
+            display: block;
+            opacity: 1;
+        }
+
+        h1.hero-title {
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            font-weight: 900;
+            letter-spacing: -2px;
+            margin-bottom: 20px;
+        }
+
+        .pill {
+            display: inline-block;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--bg-dark);
+            box-shadow: 8px 8px 0px rgba(255,255,255,0.05);
+            margin: 10px;
+            text-transform: uppercase;
+        }
+        .pill-pink { background-color: var(--gsap-pink); transform: rotate(-4deg); }
+        .pill-green { background-color: var(--gsap-green); transform: rotate(3deg); }
+        .pill-cyan { background-color: var(--gsap-cyan); transform: rotate(-2deg); }
+
+        .gsap-btn {
+            background: transparent;
+            color: var(--text-cream);
+            border: 2px solid var(--text-cream);
+            padding: 14px 35px;
+            border-radius: 40px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin: 15px;
+        }
+        .gsap-btn:hover {
+            background: var(--text-cream);
+            color: var(--bg-dark);
+            transform: translateY(-3px);
+        }
+
+        /* Class Directory Grid */
+        .directory-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .student-name-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--text-cream);
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .student-name-btn:hover {
+            background: var(--text-cream);
+            color: var(--bg-dark);
+            transform: scale(1.05);
+            border-color: var(--text-cream);
+        }
+
+        /* Final Success Button Style */
+        .final-success-btn {
+            background: var(--gsap-orange);
+            color: var(--bg-dark);
+            border: none;
+            padding: 12px 40px;
+            border-radius: 40px;
+            font-size: 1.3rem;
+            font-weight: 900;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: 0 5px 15px rgba(255, 179, 71, 0.3);
+        }
+        .final-success-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(255, 179, 71, 0.6);
+        }
+
+        .profile-circle {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: #222;
+            color: var(--text-cream);
+            font-size: 3rem;
+            font-weight: 900;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            border: 4px solid var(--gsap-orange); 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .message-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            line-height: 1.6;
+            margin: 20px auto;
+            max-width: 800px;
+            color: #e2e2e2;
+        }
+
+        .animated-border-card {
+            position: relative;
+            padding: 5px;
+            border-radius: 30px;
+            background: transparent;
+            overflow: hidden;
+            margin: 0 auto;
+            max-width: 700px;
+            --border-color-1: var(--gsap-green);
+            --border-color-2: var(--gsap-pink);
+        }
+
+        .animated-border-card::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: conic-gradient(from 0deg, transparent 0%, var(--border-color-1) 25%, transparent 50%, var(--border-color-2) 75%, transparent 100%);
+            animation: rotate-border 5s linear infinite;
+            z-index: 0;
+        }
+
+        .card-inner {
+            position: relative;
+            z-index: 1;
+            background: #181818;
+            border-radius: 25px;
+            padding: 40px 30px;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.8);
+        }
+
+        @keyframes rotate-border {
+            100% { transform: rotate(360deg); }
+        }
+
+        .tooltip-inner {
+            background-color: var(--text-cream);
+            color: var(--bg-dark);
+            font-weight: 700;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1rem;
+        }
+        
+        #final-success-image {
+            max-width: 90%;
+            max-height: 80vh;
+            border-radius: 20px;
+            object-fit: contain;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+    </div>
+
+    <!-- Background Music -->
+    <audio id="bg-audio" src="background.mp3" preload="auto"></audio>
+
+    <div class="app-container">
+        
+        <!-- 1. Intro Screen -->
+        <div id="intro-screen" class="screen active">
+            <h1 class="hero-title">KCSE 2026</h1>
+            <div class="pill pill-pink">Excellence</div>
+            <div class="pill pill-green">Success</div>
+            <br>
+            <button class="gsap-btn" id="start-btn" onclick="startExperience()">Tap for Best wishes</button>
+        </div>
+
+        <!-- 2. Teacher Screen -->
+        <div id="teacher-screen" class="screen">
+            <div class="profile-circle" id="teacher-pic" style="border-color: var(--gsap-orange);">SC</div>
+            
+            <button class="gsap-btn" id="teacher-name-btn" data-bs-toggle="tooltip" data-bs-placement="top" title="Computer Teacher" style="margin-top: 0; padding: 8px 25px;">
+                Seth Chenge
+            </button>
+            
+            <div class="message-text" id="teacher-msg">
+                My dear students, everything that is to come in KCSE has already been taught. 
+                Do not fear at all. Give your best! I have absolute confidence that you will 
+                give me a mean of 12. You all can get an A!
+            </div>
+            
+            <button class="gsap-btn" id="next-to-students-btn" onclick="showDirectory()">View Student Wishes</button>
+        </div>
+
+        <!-- 3. Class Directory Screen -->
+        <div id="directory-screen" class="screen">
+            <h2 class="hero-title" style="font-size: 3rem; margin-bottom: 10px;">Form 4 Class</h2>
+            <p style="font-size: 1.2rem; color: #a8ff78;">Select your name to receive your wish</p>
+            <div class="directory-grid" id="student-buttons-container">
+                <!-- Buttons injected by JS -->
+            </div>
+            
+            <!-- NEW: Final Success Button positioned at the bottom right -->
+            <div style="width: 100%; display: flex; justify-content: flex-end; margin-top: 50px;">
+                <button class="final-success-btn" onclick="showFinalSuccess()">SUCCESS</button>
+            </div>
+        </div>
+
+        <!-- 4. Dynamic Student Screen -->
+        <div id="student-screen" class="screen">
+            <div class="animated-border-card" id="student-card-wrapper">
+                <div class="card-inner">
+                    <div class="profile-circle" id="student-pic">AB</div>
+                    <h2 class="hero-title" id="student-name" style="font-size: 2.5rem; margin-bottom: 15px;">Name</h2>
+                    
+                    <div id="student-pill" class="pill">Marks</div>
+                    
+                    <div class="message-text" id="student-msg" style="font-size: 1.4rem;">
+                        Message goes here.
+                    </div>
+                    
+                    <button class="gsap-btn" id="thank-you-btn" onclick="returnToDirectory()">Thank you</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 5. FINAL SUCCESS SCREEN -->
+        <div id="final-success-screen" class="screen">
+            <img src="Success.jpeg" id="final-success-image" alt="Success!">
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        const students = [
+            { name: "Glady Jemutai", initials: "GJ", score: "92 A", pillClass: "pill-green", color1: "#a8ff78", color2: "#70e1f5", wish: "Incredible 92, Glady! You are at the very top. Maintain this brilliance, and that final A is definitively yours. Keep leading the way!" },
+            { name: "Hazel Ntinyari Kirimi", initials: "HK", score: "89 A", pillClass: "pill-cyan", color1: "#70e1f5", color2: "#ff7eb3", wish: "An outstanding 89, Hazel! You've shown what true excellence looks like. Keep this fire burning to the end—your A is waiting!" },
+            { name: "Wanjiku Valentine", initials: "WV", score: "89 A", pillClass: "pill-pink", color1: "#ff7eb3", color2: "#ffb347", wish: "Fantastic 89, Valentine! You have the mindset of a champion. Guard this momentum closely and secure your well-deserved A!" },
+            { name: "Frida Kanana", initials: "FK", score: "79 A-", pillClass: "pill-green", color1: "#a8ff78", color2: "#70e1f5", wish: "A beautiful 79, Frida! You are knocking right on the door of a solid A plain. Push just a little harder—there are no limits to what you can achieve!" },
+            { name: "Mutwiri Favour Gakii", initials: "MG", score: "77 A-", pillClass: "pill-cyan", color1: "#70e1f5", color2: "#ff7eb3", wish: "Great work with 77, Favour! You have the skills and the drive. Give this final stretch everything you have, and claim your A!" },
+            { name: "Faith Gacheri", initials: "FG", score: "76 A-", pillClass: "pill-pink", color1: "#ff7eb3", color2: "#ffb347", wish: "A very strong 76, Faith! You are so close to the top bracket. Remember, you are entirely unlimited. Go get that A!" },
+            { name: "Mutwiri Bridget Kinya", initials: "MK", score: "73 B+", pillClass: "pill-green", color1: "#a8ff78", color2: "#70e1f5", wish: "Excellent 73, Bridget! Your foundation is rock solid. With absolute focus in these final days, stepping up to an A is completely possible!" },
+            { name: "Kariuki Nyambura Winfred", initials: "KW", score: "73 B+", pillClass: "pill-cyan", color1: "#70e1f5", color2: "#ff7eb3", wish: "A wonderful 73, Winfred! You've proven you understand the concepts. Now, sprint to the finish line—an A is yours if you want it!" },
+            { name: "Esther Kinya", initials: "EK", score: "72 B+", pillClass: "pill-pink", color1: "#ff7eb3", color2: "#ffb347", wish: "Great job on the 72, Esther! Keep your head high and your focus sharp. You have what it takes to climb straight to an A!" },
+            { name: "Maryann Ntinyari", initials: "MN", score: "71 B+", pillClass: "pill-green", color1: "#a8ff78", color2: "#70e1f5", wish: "A brilliant 71, Maryann! You are well on your way. Do not hold back now; push beyond your limits and that A will be yours." },
+            { name: "Elsy Kawira", initials: "EK", score: "71 B+", pillClass: "pill-cyan", color1: "#70e1f5", color2: "#ff7eb3", wish: "Fantastic 71, Elsy! You have incredible potential. Channel all your energy into these final preparations and cross into the A territory!" },
+            { name: "Sharon Kathomi Micubu", initials: "SM", score: "70 B+", pillClass: "pill-pink", color1: "#ff7eb3", color2: "#ffb347", wish: "A strong 70, Sharon! You’ve crossed the B+ mark beautifully. Now set your sights higher—you are not limited. Aim for the A!" },
+            { name: "Halima Safia", initials: "HS", score: "70 B+", pillClass: "pill-green", color1: "#a8ff78", color2: "#70e1f5", wish: "Wonderful 70, Halima! Your consistent effort is paying off. Keep pushing boundaries—there is an A waiting for you at the finish line." },
+            { name: "Blessy Ntinyari", initials: "BN", score: "70 B+", pillClass: "pill-cyan", color1: "#70e1f5", color2: "#ff7eb3", wish: "A well-deserved 70, Blessy! You have the capacity for greatness. Keep practicing, stay confident, and that A is entirely possible." },
+            { name: "Mukiri Sharon", initials: "MS", score: "70 B+", pillClass: "pill-pink", color1: "#ff7eb3", color2: "#ffb347", wish: "Excellent 70, Sharon! You are right on the edge of the next tier. Give it your absolute all, and watch yourself secure an A!" },
+            { name: "Faith Kagendo Peter", initials: "FP", score: "70 B+", pillClass: "pill-green", color1: "#a8ff78", color2: "#70e1f5", wish: "Great 70, Faith! Your determination is clear. Let nothing hold you back now. An A is perfectly within your reach!" },
+            { name: "Nelly Kathure", initials: "NK", score: "69 B", pillClass: "pill-cyan", color1: "#70e1f5", color2: "#ff7eb3", wish: "A solid 69, Nelly! You are just one mark away from the next grade. Push hard, shatter your limits, and climb all the way to an A!" },
+            { name: "Miriam Makena", initials: "MM", score: "67 B", pillClass: "pill-pink", color1: "#ff7eb3", color2: "#ffb347", wish: "Wonderful 67, Miriam! You have built a great foundation. Unleash your full potential in KCSE—you can absolutely score an A!" },
+            { name: "Glory Mwendwa", initials: "GM", score: "66 B", pillClass: "pill-green", color1: "#a8ff78", color2: "#70e1f5", wish: "Good job with the 66, Glory! Never underestimate what a final, focused sprint can do. Believe in yourself and go for that A!" },
+            { name: "Liza Nkatha Mugambi", initials: "LM", score: "65 B", pillClass: "pill-cyan", color1: "#70e1f5", color2: "#ff7eb3", wish: "A solid 65, Liza! You've shown you understand the work. Now is the time to double down and surprise everyone with a brilliant A!" },
+            { name: "Whitney Kamathi", initials: "WK", score: "56 C+", pillClass: "pill-pink", color1: "#ff7eb3", color2: "#ffb347", wish: "Great effort for 56, Whitney! Remember, in this class, no one is limited. If you give it everything you've got, an A is still a reality for you!" },
+            { name: "Kaari Vivian Njeri", initials: "KN", score: "55 C+", pillClass: "pill-green", color1: "#a8ff78", color2: "#70e1f5", wish: "Good work on the 55, Vivian! You have so much untapped potential. Let go of any fears, push your boundaries, and aim straight for an A!" },
+            { name: "Mworia Blessing Kinya", initials: "MK", score: "55 C+", pillClass: "pill-cyan", color1: "#70e1f5", color2: "#ff7eb3", wish: "A strong 55, Blessing! Don't let this score define your ceiling. You are capable of extraordinary things. Study hard and claim your A!" }
+        ];
+
+        const audio = document.getElementById('bg-audio');
+
+        function playAudioSafely() {
+            let playPromise = audio.play();
+            if (playPromise !== undefined) {
+                playPromise.catch(error => console.log("Audio loading/blocked. Continuing visuals."));
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const container = document.getElementById('student-buttons-container');
+            students.forEach((student, index) => {
+                const btn = document.createElement('button');
+                btn.className = 'student-name-btn';
+                btn.innerText = student.name;
+                btn.onclick = () => loadStudentCard(index);
+                container.appendChild(btn);
+            });
+
+            gsap.fromTo(".hero-title", {y: -50, opacity: 0}, {y: 0, opacity: 1, duration: 1, ease: "bounce.out"});
+            gsap.fromTo(".pill", {scale: 0, opacity: 0}, {scale: 1, opacity: 1, duration: 0.8, stagger: 0.2, ease: "back.out(1.7)", delay: 0.5});
+            gsap.fromTo("#start-btn", {y: 50, opacity: 0}, {y: 0, opacity: 1, duration: 1, delay: 1.2});
+        });
+
+        function startExperience() {
+            gsap.to("#intro-screen", {opacity: 0, scale: 0.9, duration: 0.8, onComplete: () => {
+                document.getElementById('intro-screen').classList.remove('active');
+                document.getElementById('teacher-screen').classList.add('active');
+                
+                gsap.fromTo("#teacher-screen", {opacity: 0}, {opacity: 1, duration: 0.8});
+                gsap.fromTo("#teacher-pic", {scale: 0, rotation: 360}, {scale: 1, rotation: 0, duration: 1, ease: "back.out(1.5)"});
+                gsap.fromTo("#teacher-name-btn", {y: 20, opacity: 0}, {y: 0, opacity: 1, duration: 0.8, delay: 0.2});
+                gsap.fromTo("#teacher-msg", {opacity: 0, y: 30}, {opacity: 1, y: 0, duration: 1.2, delay: 0.5});
+                gsap.fromTo("#next-to-students-btn", {scale: 0, opacity: 0}, {scale: 1, opacity: 1, duration: 0.5, delay: 1});
+                
+                const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+                [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
+            }});
+        }
+
+        function showDirectory() {
+            playAudioSafely();
+            
+            const currentScreen = document.querySelector('.screen.active');
+            gsap.to(currentScreen, {opacity: 0, y: -50, duration: 1.2, onComplete: () => {
+                currentScreen.classList.remove('active');
+                currentScreen.style.transform = ''; 
+                
+                const dirScreen = document.getElementById('directory-screen');
+                dirScreen.classList.add('active');
+                
+                gsap.fromTo(dirScreen, {opacity: 0}, {opacity: 1, duration: 1});
+
+                gsap.fromTo(".student-name-btn", 
+                    {scale: 0, opacity: 0}, 
+                    {scale: 1, opacity: 1, duration: 0.5, stagger: 0.05, ease: "back.out(1.5)"}
+                );
+                
+                // Animate the final success button in along with the names
+                gsap.fromTo(".final-success-btn", {opacity: 0, y: 30}, {opacity: 1, y: 0, duration: 1, delay: 1.5});
+            }});
+        }
+
+        function loadStudentCard(index) {
+            const student = students[index];
+            const dirScreen = document.getElementById('directory-screen');
+            const studentScreen = document.getElementById('student-screen');
+
+            document.getElementById('student-pic').innerText = student.initials;
+            document.getElementById('student-pic').style.borderColor = student.color1;
+            
+            const wrapper = document.getElementById('student-card-wrapper');
+            wrapper.style.setProperty('--border-color-1', student.color1);
+            wrapper.style.setProperty('--border-color-2', student.color2);
+            
+            document.getElementById('student-name').innerText = student.name;
+            document.getElementById('student-msg').innerText = student.wish;
+            
+            const pill = document.getElementById('student-pill');
+            pill.className = `pill ${student.pillClass}`;
+            pill.innerText = student.score;
+
+            gsap.to(dirScreen, {opacity: 0, scale: 0.9, duration: 1.5, onComplete: () => {
+                dirScreen.classList.remove('active');
+                dirScreen.style.transform = '';
+                
+                setTimeout(() => {
+                    studentScreen.classList.add('active');
+                    
+                    gsap.fromTo(studentScreen, {opacity: 0, y: 50}, {opacity: 1, y: 0, duration: 1.5, onComplete: () => {
+                        audio.pause();
+                    }});
+                    
+                    gsap.fromTo("#student-pic", {scale: 0}, {scale: 1, duration: 0.8, delay: 0.3, ease: "back.out(1.5)"});
+                    gsap.fromTo("#student-name", {opacity: 0, x: -30}, {opacity: 1, x: 0, duration: 0.8, delay: 0.6});
+                    gsap.fromTo("#student-pill", {scale: 0}, {scale: 1, duration: 0.8, delay: 0.9, ease: "elastic.out(1, 0.3)"});
+                    gsap.fromTo("#student-msg", {opacity: 0, y: 20}, {opacity: 1, y: 0, duration: 0.8, delay: 1.2});
+                    gsap.fromTo("#thank-you-btn", {opacity: 0}, {opacity: 1, duration: 0.5, delay: 1.5});
+                    
+                }, 2000); 
+            }});
+        }
+
+        function returnToDirectory() {
+            playAudioSafely(); 
+            const studentScreen = document.getElementById('student-screen');
+            const dirScreen = document.getElementById('directory-screen');
+            
+            gsap.to(studentScreen, {opacity: 0, scale: 1.1, duration: 1.2, onComplete: () => {
+                studentScreen.classList.remove('active');
+                studentScreen.style.transform = '';
+                
+                setTimeout(() => {
+                    dirScreen.classList.add('active');
+                    gsap.fromTo(dirScreen, {opacity: 0}, {opacity: 1, duration: 1});
+                    gsap.fromTo(".student-name-btn", {opacity: 0, y: 10}, {opacity: 1, y: 0, duration: 0.5, stagger: 0.03});
+                    gsap.fromTo(".final-success-btn", {opacity: 0}, {opacity: 1, duration: 0.5, delay: 0.5});
+                }, 1000);
+            }});
+        }
+        
+        // NEW: Final Success Function
+        function showFinalSuccess() {
+            const dirScreen = document.getElementById('directory-screen');
+            const finalScreen = document.getElementById('final-success-screen');
+            
+            // Ensure music is still playing for the grand finale
+            playAudioSafely();
+            
+            gsap.to(dirScreen, {opacity: 0, y: 50, duration: 1, onComplete: () => {
+                dirScreen.classList.remove('active');
+                dirScreen.style.transform = '';
+                
+                finalScreen.classList.add('active');
+                
+                // Fade in container
+                gsap.fromTo(finalScreen, {opacity: 0}, {opacity: 1, duration: 0.5});
+                
+                // Dramatic, playful entrance for the Success sticker image
+                gsap.fromTo("#final-success-image", 
+                    {scale: 0, rotation: -20, opacity: 0}, 
+                    {scale: 1, rotation: 0, opacity: 1, duration: 1.5, ease: "elastic.out(1, 0.4)"}
+                );
+            }});
+        }
+    </script>
+</body>
+</html>
